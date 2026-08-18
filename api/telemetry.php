@@ -10,6 +10,7 @@ const TELEMETRY_EXTENSION = ".log";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (!file_exists("./Users/" . GetUUID() .  ".rtp")) {
+        http_response_code(401);
         die(json_encode([
             'status' => "YEAH, *DROPS UR PACKAGE*"
         ]));
@@ -42,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     };
 };
 
+
+http_response_code(400);
 die(json_encode([
     'status' => 'not supported.'
 ]));

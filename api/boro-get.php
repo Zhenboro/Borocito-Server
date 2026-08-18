@@ -8,15 +8,19 @@ if (isset($_GET['component']) && $_GET['component']!="") {
 
     $componente_bin = "./boro-get/binaries/" . $componente . ".zip";
     if (isset($_GET['download']) && $_GET['download']!="") {
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="'.basename($componente_bin).'"');
-        die(readfile($componente_bin));
+        if (file_exists($componente_bin)) {
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.basename($componente_bin).'"');
+            die(readfile($componente_bin));
+        }
     };
 
     $componente_inf = "./boro-get/" . $componente . ".inf";
     if (file_exists($componente_inf)) {
         die(readfile($componente_inf));
     };
+    
+    http_response_code(404);
 };
 
 $componentes = array();
@@ -28,8 +32,7 @@ foreach($iterator as $fileInfo) {
     };
 };
 
-$retorno = "
-# Boro-Get Repository Configuration File
+$retorno = "# Boro-Get Repository Configuration File
 [REPOSITORIES]
 ";
 foreach($componentes as $componente) {
