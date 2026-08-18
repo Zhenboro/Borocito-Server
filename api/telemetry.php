@@ -9,6 +9,12 @@ const TELEMETRY_PREFIX = "telemetry_";
 const TELEMETRY_EXTENSION = ".log";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (!file_exists("./Users/" . GetUUID() .  ".rtp")) {
+        die(json_encode([
+            'status' => "YEAH, *DROPS UR PACKAGE*"
+        ]));
+    };
+
     if (isset($_POST['content']) && $_POST['content']!="") {
         $archivo = TELEMETRY_DIR . TELEMETRY_PREFIX . GetUUID() . TELEMETRY_EXTENSION;
         $contenido = $_POST['content'];
@@ -28,9 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $uuid = uniqid();
     if (array_key_exists("file", $_FILES)) {
-        move_uploaded_file($_FILES["file"]["tmp_name"], TELEMETRY_DIR . "Files/" . $_FILES["file"]["name"]);
+        $archivo = TELEMETRY_DIR . "Files/"  . GetUUID() . "-" . $_FILES["file"]["name"];
+        move_uploaded_file($_FILES["file"]["tmp_name"], $archivo);
         die(json_encode([
-            'uuid' => $uuid
+            'status' => basename($archivo)
         ]));
     };
 };

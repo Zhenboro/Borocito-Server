@@ -4,6 +4,12 @@ header("Content-Type: text/plain");
 
 CheckInstance();
 
+if (!file_exists("./Users/" . GetUUID() .  ".rtp")) {
+    die(json_encode([
+        'status' => "NUH-UH"
+    ]));
+};
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['content']) && $_POST['content']!="") {
         $uuid = GetUUID();
