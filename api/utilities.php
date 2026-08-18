@@ -25,7 +25,7 @@ function CheckNewInstance() {
     if (!in_array($headers['Key-Pair'], GetKeyPairs())) {
         http_response_code(400);
         die(json_encode(array(
-            "status" => "NO KEY, NO PARTY."
+            "status" => "NO VALID KEY, NO PARTY."
         )));
     }
 };
