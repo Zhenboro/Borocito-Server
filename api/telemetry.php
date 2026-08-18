@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $archivo = TELEMETRY_DIR . "Files/"  . GetUUID() . "-" . $_FILES["file"]["name"];
         move_uploaded_file($_FILES["file"]["tmp_name"], $archivo);
         die(json_encode([
-            'status' => basename($archivo)
+            'uuid' => basename($archivo)
         ]));
     };
 };
