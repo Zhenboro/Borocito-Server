@@ -1,4 +1,6 @@
 
 *.rtp
 *.str
-*.tlm
+*.log
+*.zip
+*.inf
