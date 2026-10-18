@@ -1,3 +1,4 @@
 RewriteEngine On
 
-RewriteRule ^api(?:/(.*))?$ index.php?route=$1 [QSA,L]
+RewriteRule ^api(?:/(.*))?$ index.php?router=api&route=$1 [QSA,L]
+RewriteRule ^control(?:/(.*))?$ index.php?router=control&route=$1 [QSA,L]
